@@ -34,6 +34,20 @@ pub fn PageInstallation(cx: Scope) -> impl IntoView {
             "In order to build your app with these styles, a build script is required. "
         </P>
 
+        <P>
+            "Now add a folder named "<Code inline=true>".cargo"</Code>" to the root and add a file to that folder named "<Code inline=true>"config.toml"</Code>". Then add the following contents to that file:"
+        </P>
+        
+        <Code>
+            {indoc!(
+                r#"
+                    [build]
+                    # The 'web_sys_unstable_apis' flag is required, because we use https://leptos-use.rs/elements/use_element_size.html which states this requirement. This might change in the future.
+                    rustflags = ["--cfg", "web_sys_unstable_apis"]
+                "#
+            )}
+        </Code>
+
         <P>"Let's create our "<Code inline=true>"build.rs"</Code>" file, generating our theme and copying required JS files."</P>
 
         <Code>
